@@ -13,11 +13,9 @@ import { ArrowLeft, CarFront, Heart, Layout } from "lucide-react";
 import { checkUser } from "@/lib/checkUser";
 
 const Header = async ({ isAdminPage = false }) => {
-  const user = await  checkUser();
-
+  const user = await checkUser();
 
   const isAdmin = user?.role === "ADMIN";
-
 
   return (
     <header className="fixed top-0 w-full bg-white/80 backdrop-blur-md z-50 border-b">
@@ -51,12 +49,6 @@ const Header = async ({ isAdminPage = false }) => {
                   <span className="hidden md:inline">Saved Cars</span>
                 </Button>
               </Link>
-              <Link href="/reservations">
-                  <Button variant="outline">
-                    <CarFront size={18} />
-                    <span className="hidden md:inline">My Reservations</span>
-                  </Button>
-                </Link>
               {!isAdmin ? (
                 <Link href="/reservations">
                   <Button variant="outline">
@@ -65,12 +57,20 @@ const Header = async ({ isAdminPage = false }) => {
                   </Button>
                 </Link>
               ) : (
-                <Link href="/admin">
-                  <Button variant="outline">
-                    <Layout size={18} />
-                    <span className="hidden md:inline">Admin Portal</span>
-                  </Button>
-                </Link>
+                <>
+                  <Link href="/reservations">
+                    <Button variant="outline">
+                      <CarFront size={18} />
+                      <span className="hidden md:inline">My Reservations</span>
+                    </Button>
+                  </Link>
+                  <Link href="/admin">
+                    <Button variant="outline">
+                      <Layout size={18} />
+                      <span className="hidden md:inline">Admin Portal</span>
+                    </Button>
+                  </Link>
+                </>
               )}
             </SignedIn>
           )}
